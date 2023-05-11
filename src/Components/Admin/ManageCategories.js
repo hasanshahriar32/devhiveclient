@@ -94,14 +94,14 @@ const ManageCategories = () => {
                   <h2 className="card-title h-20">{type?.name}</h2>
                   <p className="overflow-hidden h-40">{type?.about}</p>
                   <div className="card-actions justify-end">
-                    <button
+                    {/* <button
                       onClick={() => {
                         handleDelete(type?._id);
                       }}
                       className="btn btn-error text-error btn-outline "
                     >
                       <AiOutlineDelete className="text-2xl text-center"></AiOutlineDelete>
-                    </button>
+                    </button> */}
                     <Link to={`${type?.route}`}>
                       <button className="btn btn-primary">Discover</button>
                     </Link>

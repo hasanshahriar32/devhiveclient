@@ -43,6 +43,7 @@ import OrderSuccess from "../Components/Orders/Components/OrderSuccess";
 import OrderError from "../Components/Orders/Components/OrderError";
 import OrderCancel from "../Components/Orders/Components/OrderCancel";
 import ServiceQuery from "../Components/Services/ServiceQuery";
+import SingleServiceQuery from "../Components/Services/SingleServiceQuery";
 import CreateService from "../Pages/CreateService";
 import DeveloperOrder from "../Components/DeveloperProfile.js/DeveloperOrder";
 import DeveloperGIg from "../Components/DeveloperProfile.js/DeveloperGIg";
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/serviceQuery/:category",
         element: <ServiceQuery />,
+      },
+      {
+        path: "/serviceQuery/single",
+        element: <SingleServiceQuery />,
       },
       {
         path: "/digital-marketing",

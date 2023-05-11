@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Header.module.css";
 import HeaderDrawer from "./HeaderComponents/HeaderDrawer";
@@ -35,6 +35,14 @@ const Header = () => {
   };
 
   const handleCloseModal = () => {
+    setSearch("");
+    setIsModalOpen(false);
+  };
+  const handleSerarch = () => {
+    navigate("/serviceQuery/single", {
+      state: { data: service },
+    });
+    setSearch("");
     setIsModalOpen(false);
   };
   const [developerStatus, setDeveloperStatus] = useState(false);
@@ -80,7 +88,8 @@ const Header = () => {
       console.log(error);
     }
   }, [search]);
-  console.log(service);
+  // console.log(service);
+  const navigate = useNavigate();
   return (
     <div>
       <header>
@@ -165,14 +174,16 @@ const Header = () => {
                       ></path>
                     </svg>
                   </div>
-                  {search!="" && <button
-                    onClick={() => {
-                      setSearch("");
-                    }}
-                    class="flex btn btn-circle btn-ghost btn-outline btn-xs absolute right-2 top-2"
-                  >
-                    <AiOutlineClose />
-                  </button>}
+                  {search != "" && (
+                    <button
+                      onClick={() => {
+                        setSearch("");
+                      }}
+                      class="flex btn btn-circle btn-ghost btn-outline btn-xs absolute right-2 top-2"
+                    >
+                      <AiOutlineClose />
+                    </button>
+                  )}
                   <input
                     onChange={(e) => setSearch(e.target.value)}
                     type="text"
@@ -192,7 +203,7 @@ const Header = () => {
                           key={single?._id}
                         >
                           <Link
-                          to={`services/slug/${single?._id}`}
+                            to={`services/slug/${single?._id}`}
                             className="w-full"
                             onClick={() => {
                               setSearch("");
@@ -257,15 +268,17 @@ const Header = () => {
                               Search
                             </h3>
                             <div className="mt-2">
-                              <form>
+                              <form onSubmit={handleQuery}>
                                 <input
+                                  onChange={(e) => setSearch(e.target.value)}
+                                  value={search}
                                   type="text"
                                   placeholder="Search"
                                   className="border-gray-200 bg-transparent border-2 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-gray-400"
                                 />
                                 <div className="mt-4">
                                   <button
-                                    type="submit"
+                                    onClick={handleSerarch}
                                     className="bg-blue-500 btn btn-outline text-white rounded-lg px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
                                   >
                                     Search

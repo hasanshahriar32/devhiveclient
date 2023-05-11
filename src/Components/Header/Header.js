@@ -12,6 +12,7 @@ import { RiDashboardFill } from "react-icons/ri";
 import { IoIosCreate } from "react-icons/io";
 import { MdSell } from "react-icons/md";
 import useChat from "../../hooks/useChat";
+import useAdmin from "../../hooks/useAdmin";
 const Header = () => {
   const [drawer, setDrawer] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +34,21 @@ const Header = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
+  const [developerStatus, setDeveloperStatus] = useState(false);
+  useEffect(() => {
+    fetch(
+      `https://devhiveserver.vercel.app/developer/singledeveloper/${localStorage.getItem(
+        "user_id"
+      )}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          setDeveloperStatus(true);
+        }
+      });
+  }, [isLoggedIn, userData]);
+  const [admin] = useAdmin();
   return (
     <div>
       <header>
@@ -224,56 +239,46 @@ const Header = () => {
                   </span>
                 </button>
               </NavLink>
-              <NavLink className="hidden lg:block" to="/start_selling">
-                <button
-                  type="button"
-                  data-dropdown-toggle="apps-dropdown"
-                  class="flex flex-row gap-1 p-2 items-center  ml-0 sm:ml-3 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
-                >
-                  <MdSell className="text-2xl mt-1  xl:hidden block"></MdSell>
-                  <span className="font-semibold hidden antialiased xl:block mt-1">
-                    Start Selling
-                  </span>
-                </button>
-              </NavLink>
-              {isLoggedIn && (
-                <NavLink className="hidden lg:block" to="/create-service">
+              {developerStatus == false && (
+                <NavLink className="hidden lg:block" to="/start_selling">
                   <button
                     type="button"
                     data-dropdown-toggle="apps-dropdown"
                     class="flex flex-row gap-1 p-2 items-center  ml-0 sm:ml-3 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
                   >
-                    <IoIosCreate className="text-2xl xl:hidden block"></IoIosCreate>
+                    <MdSell className="text-2xl mt-1  xl:hidden block"></MdSell>
                     <span className="font-semibold hidden antialiased xl:block mt-1">
-                      Create
-                    </span>
-                    <span className="font-semibold hidden antialiased xl:block mt-1">
-                      Service
+                      Start Selling
                     </span>
                   </button>
                 </NavLink>
               )}
               {/* developer start */}
-              {isLoggedIn && (
+              {isLoggedIn && developerStatus == true && (
                 <div
                   title="developer section"
-                  className="dropdown mt-1 dropdown-end"
+                  className="dropdown dropdown-end"
                 >
                   <label tabIndex={0}>
                     <button
                       type="button"
                       data-dropdown-toggle="apps-dropdown"
-                      class="p-2 hidden lg:block text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                      class="p-2  text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                     >
-                      <svg
-                        aria-hidden="true"
-                        class="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
-                      </svg>
+                      <div className="xl:hidden block">
+                        <svg
+                          aria-hidden="true"
+                          class="w-6 h-6"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
+                        </svg>
+                      </div>
+                      <span className="font-semibold hidden antialiased xl:block mt-1">
+                        Developer
+                      </span>
                     </button>
                   </label>
                   <ul
@@ -281,7 +286,11 @@ const Header = () => {
                     className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                   >
                     <li>
-                      <NavLink to="/developer-profile">
+                      <NavLink
+                        to={`/developer-profile/${localStorage.getItem(
+                          "user_id"
+                        )}`}
+                      >
                         Developer Profile
                       </NavLink>
                     </li>
@@ -295,17 +304,36 @@ const Header = () => {
                 </div>
               )}
               {/* developer end  */}
-              {/* admin start */}
-              {isLoggedIn && (
-                <NavLink className="hidden lg:block" to="/dashboard">
+
+              {isLoggedIn && developerStatus == true && (
+                <NavLink className="hidden lg:block" to="/create-service">
                   <button
                     type="button"
                     data-dropdown-toggle="apps-dropdown"
-                    class="flex flex-row gap-1 p-2 items-center  ml-0 sm:ml-3 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
+                    class="flex flex-row gap-1 p-2 items-center  ml-0  text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
+                  >
+                    <IoIosCreate className="text-2xl xl:hidden block"></IoIosCreate>
+                    <span className="font-semibold hidden antialiased xl:block mt-1">
+                      Create
+                    </span>
+                    <span className="font-semibold hidden antialiased xl:block mt-1">
+                      Service
+                    </span>
+                  </button>
+                </NavLink>
+              )}
+
+              {/* admin start */}
+              {isLoggedIn && admin && (
+                <NavLink className="hidden lg:block" to="/admin">
+                  <button
+                    type="button"
+                    data-dropdown-toggle="apps-dropdown"
+                    class="flex flex-row gap-1 p-2 items-center  ml-0  text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
                   >
                     <RiDashboardFill className="text-2xl xl:hidden block"></RiDashboardFill>
                     <span className="font-semibold hidden antialiased xl:block mt-1">
-                      Dashboard
+                      Admin
                     </span>
                   </button>
                 </NavLink>

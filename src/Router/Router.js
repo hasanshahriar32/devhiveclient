@@ -45,6 +45,7 @@ import OrderCancel from "../Components/Orders/Components/OrderCancel";
 import ServiceQuery from "../Components/Services/ServiceQuery";
 import CreateService from "../Pages/CreateService";
 import DeveloperOrder from "../Components/DeveloperProfile.js/DeveloperOrder";
+import DeveloperGIg from "../Components/DeveloperProfile.js/DeveloperGIg";
 
 const router = createBrowserRouter([
   {
@@ -187,6 +188,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-gigs",
+        element: (
+          <PrivateRoute>
+            <DeveloperGIg />
           </PrivateRoute>
         ),
       },

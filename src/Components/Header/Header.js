@@ -13,9 +13,12 @@ import { IoIosCreate } from "react-icons/io";
 import { MdSell } from "react-icons/md";
 import useChat from "../../hooks/useChat";
 import useAdmin from "../../hooks/useAdmin";
+import { AiOutlineClose } from "react-icons/ai";
+import axios from "axios";
 const Header = () => {
   const [drawer, setDrawer] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [service, setService] = useState([]);
   useEffect(() => {
     themeChange(false);
     // 👆 false parameter is required for react project
@@ -49,6 +52,35 @@ const Header = () => {
       });
   }, [isLoggedIn, userData]);
   const [admin] = useAdmin();
+  const handleQuery = (e) => {
+    e.preventDefault();
+  };
+  const [search, setSearch] = useState("");
+  useEffect(() => {
+    if (search == "") {
+      return;
+    }
+    try {
+      const user = async () => {
+        const user = localStorage.getItem("jwt");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user}`,
+          },
+        };
+        const { data } = await axios.get(
+          `https://devhiveserver.vercel.app/service/slug?search=${search}`,
+
+          config
+        );
+        setService(data);
+      };
+      user();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [search]);
+  console.log(service);
   return (
     <div>
       <header>
@@ -109,7 +141,12 @@ const Header = () => {
                   alt="devhive Logo"
                 />
               </Link>
-              <form action="#" method="GET" class="hidden lg:block lg:ml-2">
+              <form
+                action="#"
+                onSubmit={handleQuery}
+                method="GET"
+                class="hidden lg:block lg:ml-2"
+              >
                 <label for="topbar-search" class="sr-only ">
                   Search
                 </label>
@@ -128,14 +165,52 @@ const Header = () => {
                       ></path>
                     </svg>
                   </div>
+                  {search!="" && <button
+                    onClick={() => {
+                      setSearch("");
+                    }}
+                    class="flex btn btn-circle btn-ghost btn-outline btn-xs absolute right-2 top-2"
+                  >
+                    <AiOutlineClose />
+                  </button>}
                   <input
+                    onChange={(e) => setSearch(e.target.value)}
                     type="text"
                     name="search"
+                    value={search}
                     id="topbar-search"
                     class="bg-transparent border border-gray-300 text-base-content sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Search Gists"
                   />
                 </div>
+                {search && (
+                  <div className="relative z-10 top-6">
+                    <ul className="absolute menu p-2 shadow bg-base-100 rounded-box w-[450px]">
+                      {service.map((single) => (
+                        <li
+                          className="flex flex-row overflow-clip"
+                          key={single?._id}
+                        >
+                          <Link
+                          to={`services/slug/${single?._id}`}
+                            className="w-full"
+                            onClick={() => {
+                              setSearch("");
+                            }}
+                          >
+                            {" "}
+                            <img
+                              src={single?.serviceImage?.img1}
+                              className="w-6"
+                              alt=""
+                            />{" "}
+                            {single?.slugTitle}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </form>
             </div>
 

@@ -40,10 +40,13 @@ export default function CreateService() {
   let location = useLocation();
   const from = location.state?.from?.pathname || `/developer-register`;
   const [profile, setProfile] = useState([]);
+  const [profileLoading, setProfileLoading] = useState(true);
+
   const navigate = useNavigate();
   console.log(profile);
   useEffect(() => {
     try {
+      setProfileLoading(true)
       const user = async () => {
         const user = localStorage.getItem("jwt");
         const config = {
@@ -60,6 +63,7 @@ export default function CreateService() {
         );
         setProfile(data);
         // console.log(data);
+        setProfileLoading(false)
       };
       user();
     } catch (error) {
@@ -67,11 +71,11 @@ export default function CreateService() {
     }
   }, []);
 
-  //   useEffect(() => {
-  //     if (profile.length === 0) {
-  //       navigate(from, { replace: true });
-  //     }
-  //   }, [profile]);
+    useEffect(() => {
+      if (profile.length === 0 &&  profileLoading===false) {
+        navigate(from, { replace: true });
+      }
+    }, [profile]);
   console.log(profile);
 
   React.useEffect(() => {
@@ -139,7 +143,8 @@ export default function CreateService() {
     setSelectedCategory(selectedCategoryObject);
   };
   return (
-    <form onSubmit={handleFormSubmit} className="mx-2 lg:mx-6">
+    <form onSubmit={handleFormSubmit} className="mx-2 mt-3 lg:mx-6">
+      <h1 className="text-lx lg:text-3xl font-semibold text-center mb-2">Create an amazing service for your consumers</h1>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

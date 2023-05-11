@@ -60,7 +60,7 @@ const AccountSettings = () => {
     <div
       data-aos-duration="3000"
       data-aos="fade-left"
-      className="bg-white dark:bg-accent-focus w-full lg:w-[750px]"
+      className="bg-white  w-full lg:w-[750px]"
     >
       <ToastContainer />
       <section className="">

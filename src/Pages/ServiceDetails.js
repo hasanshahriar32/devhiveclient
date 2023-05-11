@@ -32,7 +32,7 @@ const ServiceDetails = () => {
     features,
   } = serviceDetails || {};
 
-  const sliders = [1, 2];
+  const sliders = [1];
   const [packages, setPackages] = useState("basic");
   let content;
   if (packages === "basic") {
@@ -128,7 +128,7 @@ const ServiceDetails = () => {
     <div>
       <div className="container mx-auto  grid grid-cols-1 lg:grid-cols-2 my-10 ">
         <div className="cols-span-12 lg:cols-span-7  pl-8">
-          <h3 className="text-3xl font-semibold text-left pr-52">
+          <h3 className="text-3xl font-semibold text-left">
             {slugTitle}
           </h3>
           <div className="flex items-start lg:flex-row flex-col pt-4 ">
@@ -200,7 +200,7 @@ const ServiceDetails = () => {
           </div>
           <div className="mt-10">
             <h2 className="text-xl font-bold">About this gig</h2>
-            <p className="pr-52 py-6 text-md font-medium">{aboutService}</p>
+            <p className="py-6 text-md font-medium">{aboutService}</p>
             <h3 className="text-lg font-bold pb-2">Services we provide:</h3>
             <ul className="pl-10 font-medium list-disc pb-6">
               <li>Business WordPress websites</li>
@@ -371,7 +371,7 @@ const ServiceDetails = () => {
         </div>
         <div className="border border-[#9ca3af] p-6 bg-[#e5e7eb] mt-16 w-10/12 ">
           <h2 className="text-2xl font-bold pb-6">Recommended for you </h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1">
             {sliders.map((slider) => (
               <>
                 {/* <Link

@@ -89,6 +89,7 @@ export default function DeveloperRegister() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        navigate(from, { replace: true });
       })
       .catch((err) => console.error(err));
     // if registerSuccess, then navigate to developer-profile
@@ -96,6 +97,8 @@ export default function DeveloperRegister() {
   };
   return (
     <form onSubmit={handleSubmit} className="Container w-1/2 my-3 mx-auto">
+      <h1 className="text-lx lg:text-3xl font-semibold text-center mb-2">Register today as a Freelancer</h1>
+
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">

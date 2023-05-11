@@ -10,6 +10,7 @@ import ProductCategory from "../Components/ProductCategory/ProductCategory";
 import HeroBanner from "../Components/Banner/HeroBanner";
 import { useSelector } from "react-redux";
 import HomeBanner from "../Components/Banner/HomeBanner";
+import ServiceSlider from "../Components/ServiceSlider/ServiceSlider";
 const Home = () => {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       {/* <NewBanner2 /> */}
       {isLoggedIn ? <HomeBanner /> : <HeroBanner />}
       <ProductCategory />
+      <ServiceSlider/>
       {/* <Services /> */}
       <Info />
       <MarketPlace />

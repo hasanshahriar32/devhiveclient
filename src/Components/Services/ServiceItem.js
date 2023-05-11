@@ -43,8 +43,6 @@ const ServiceItem = ({ data }) => {
                   name="rating-1"
                   className="mask text-sm mask-star base-400 bg-warning"
                 />
-                <h2 className="text-lg pl-1">4.8</h2>
-                <h3 className="text-lg pl-1">(35)</h3>
               </div>
             </div>
             <div className="flex">

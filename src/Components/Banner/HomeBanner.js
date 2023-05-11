@@ -9,7 +9,7 @@ const HomeBanner = () => {
         <section class="pt-12 bg-gray-50 sm:pt-16">
           <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="max-w-2xl mx-auto text-center">
-              <h1 class="px-6 text-lg text-gray-600 font-inter">
+              <h1 class="px-6 text-lg lg:text-2xl font-semibold text-gray-600 font-inter">
                 Grow your career fast with right platform.
               </h1>
               <p class="mt-5 text-4xl font-bold leading-tight text-gray-900 sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight font-pj">

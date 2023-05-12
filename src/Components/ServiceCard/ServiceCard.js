@@ -1,27 +1,26 @@
 import React from "react";
 import proBadge from "./pro-badge.svg";
 
-const ServiceCard = () => {
+const ServiceCard = ({ service }) => {
   return (
-    <div className="group border-2 border-gray-500 bg-white max-w-[20rem]">
+    <div className="group border rounded-sm border-gray-500 bg-white max-w-[20rem]">
       <div className="relative overflow-hidden">
-        <img
-          src="https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146697233/original/1b09bdcaf56818872936d0a895ecd34d2cb52f5d.jpg"
-          alt=""
-        />
+        <img className="w-96 h-48" src={service.serviceImage.img1} alt="" />
       </div>
       <div className="leading-8 text-left">
         <div className="card-body px-4">
-          <div class="flex gap-4 items-center my-4">
+          <div className="flex gap-4 items-center my-4">
             <img
-              class="object-cover w-8 h-8 rounded-full"
-              src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=100"
+              className="object-cover w-8 h-8 rounded-full"
+              src={service.developerInfo.photoURL}
               alt=""
             />
-            <h3 className="text-sm font-bold text-gray-700">Aysha_digital</h3>
+            <h3 className="text-sm font-bold text-gray-700">
+              {service.developerInfo.username}
+            </h3>
           </div>
-          <h3 className="text-xl font-semibold text-gray-700 group-hover:text-[#02c2a9]">
-            Silver High Neck Sweater Silver <br /> High Sweater Silver High Neck
+          <h3 className="text-xl font-normal capitalize text-gray-700 group-hover:text-[#02c2a9]">
+            {(service.slugTitle).length > 50 ? (service.slugTitle).slice(0, 50) + "...": (service.slugTitle)}
           </h3>
           <div className="flex justify-between items-center my-4">
             <div>
@@ -79,7 +78,7 @@ const ServiceCard = () => {
               Starting at{" "}
             </small>
             <span className="text-[20px] text-gray-700 font-semibold">
-              $120
+              ${service.price}
             </span>
           </a>
         </footer>

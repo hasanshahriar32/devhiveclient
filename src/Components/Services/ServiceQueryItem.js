@@ -10,11 +10,11 @@ const ServiceQueryItem = ({ service }) => {
     return (
         <Link to={`/services/slug/${_id}`}>
             <div>
-                <div className="hero">
+                <div className="hero mx-auto lg:w-1/2">
                     <div className="hero-content flex-col lg:flex-row">
                         <img src={serviceImage?.img1} className=" lg:max-w-xs rounded-lg shadow-2xl " alt='' />
                         <div >
-                            <h1 className="text-2xl  font-bold font-serif text-gray-600 ml-8">{slugTitle}</h1>
+                            <h1 className="text-2xl  font-semibold font-serif text-gray-600 ml-8 ">{slugTitle}</h1>
 
                             <div >
                                 <div className="card-body bg-state-300 mb-6">

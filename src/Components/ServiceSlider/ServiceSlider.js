@@ -25,12 +25,12 @@ const ServiceSlider = () => {
   }, []);
   console.log(services);
   return (
-    <div className="w-11/12 h-full mx-auto">
-      <div className="flex justify-between items-center">
-        <h2 className="text-3xl text-gray-600 font-semibold">
+    <div className="w-11/12 mt-8 h-full mx-auto">
+      <div className="flex justify-between flex-col md:flex-row items-center">
+        <h2 className="text-3xl text-primary w-full  font-bold">
           Popular Gigs From Top Sellers
         </h2>
-        <div>
+        <div className="flex md:justify-end w-full justify-between">
           <button className="button-prev left-1 text-5xl text-gray-600 hover:opacity-100 opacity-50">
             <IoIosArrowDropleftCircle />
           </button>
@@ -39,42 +39,44 @@ const ServiceSlider = () => {
           </button>
         </div>
       </div>
-      <Swiper
-        //navigation={true}
-        modules={[Navigation]}
-        navigation={{
-          nextEl: ".button-next",
-          prevEl: ".button-prev",
-        }}
-        loop={true}
-        spaceBetween={10}
-        slidesPerView={4}
-        breakpoints={{
-          "@0.00": {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          "@0.75": {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          "@1.00": {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          "@1.50": {
-            slidesPerView: 4,
-            spaceBetween: 10,
-          },
-        }}
-        className="mySwiper"
-      >
-        {services.map((service, index) => (
-          <SwiperSlide key={index}>
-            <ServiceCard service={service} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="flex justify-center mt-3 mx-auto">
+        <Swiper
+          //navigation={true}
+          modules={[Navigation]}
+          navigation={{
+            nextEl: ".button-next",
+            prevEl: ".button-prev",
+          }}
+          loop={true}
+          spaceBetween={10}
+          slidesPerView={4}
+          breakpoints={{
+            "@0.00": {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            "@0.75": {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            "@1.00": {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            "@1.50": {
+              slidesPerView: 4,
+              spaceBetween: 10,
+            },
+          }}
+          className="mySwiper"
+        >
+          {services.map((service, index) => (
+            <SwiperSlide key={index}>
+              <ServiceCard service={service} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,11 @@
 import React, { useRef } from "react";
 
-import { HiLightBulb, HiBeaker, HiPencil , HiOutlineColorSwatch   } from "react-icons/hi";
+import {
+  HiLightBulb,
+  HiBeaker,
+  HiPencil,
+  HiOutlineColorSwatch,
+} from "react-icons/hi";
 const Newsletter = () => {
   const emailRef = useRef();
   const handleSubscribe = (e) => {
@@ -19,8 +24,8 @@ const Newsletter = () => {
           <div className="mt-5 mx-auto py-2 px-3 md:px-6 max-w-md flex flex-col space-y-5">
             {/* :::Title */}
             <h2 className="text-4xl font-extrabold">
-              <span className="text-black">Stay</span>
-              <span className="text-yellow-400"> Tuned</span>
+              <span className="text-primary">Stay</span>
+              <span className="text-warning"> Tuned</span>
             </h2>
             {/* :::Text */}
             <p className="md:text-gray-500">

@@ -18,17 +18,17 @@ const ServiceCard = ({ service }) => {
             <div className="flex gap-4 items-center my-4">
               <img
                 className="object-cover w-8 h-8 rounded-full"
-                src={service.developerInfo.photoURL}
+                src={service?.developerInfo?.photoURL}
                 alt=""
               />
               <h3 className="text-sm font-bold text-gray-700">
-                {service.developerInfo.username}
+                {service?.developerInfo?.username}
               </h3>
             </div>
             <h3 className="text-xl font-normal capitalize text-gray-700 group-hover:text-[#02c2a9]">
-              {service.slugTitle.length > 50
-                ? service.slugTitle.slice(0, 50) + "..."
-                : service.slugTitle}
+              {service?.slugTitle?.length > 50
+                ? service?.slugTitle.slice(0, 50) + "..."
+                : service?.slugTitle}
             </h3>
             <div className="flex justify-between items-center my-4">
               <div>
@@ -86,7 +86,7 @@ const ServiceCard = ({ service }) => {
                 Starting at{" "}
               </small>
               <span className="text-[20px] text-gray-700 font-semibold">
-                ${service.price}
+                ${service?.price}
               </span>
             </a>
           </footer>

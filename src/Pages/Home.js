@@ -11,6 +11,7 @@ import HeroBanner from "../Components/Banner/HeroBanner";
 import { useSelector } from "react-redux";
 import HomeBanner from "../Components/Banner/HomeBanner";
 import ServiceSlider from "../Components/ServiceSlider/ServiceSlider";
+import ServiceSlider2 from "../Components/ServiceSlider/ServiceSlider2";
 const Home = () => {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   return (
@@ -21,6 +22,7 @@ const Home = () => {
       <ServiceSlider />
       {/* <Services /> */}
       <Info />
+      <ServiceSlider2 />
       <MarketPlace />
       {/* <Team /> */}
       <FiverrBusiness />

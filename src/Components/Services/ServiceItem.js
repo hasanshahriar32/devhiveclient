@@ -6,16 +6,17 @@ const ServiceItem = ({ data }) => {
 
   return (
     <div className="card w-full bg-base-100 shadow-xl ">
-      <div class="group block ">
-        <div class="relative h-72 ">
-          <img
-            src={serviceImage?.img1}
-            alt=""
-            class="absolute inset-0 h-full w-full  opacity-100 "
-          />
-        </div>
-      </div>
       <Link to={`/services/slug/${_id}`}>
+        <div class="group block ">
+          <div class="relative h-72 ">
+            <img
+              src={serviceImage?.img1}
+              alt=""
+              class="absolute  inset-0 w-full h-full object-cover object-center  opacity-100 "
+            />
+          </div>
+        </div>
+
         <div className="card-body bg-state-300">
           <div className="flex">
             <div className="avatar-group -space-x-6">

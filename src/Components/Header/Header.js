@@ -15,6 +15,7 @@ import useChat from "../../hooks/useChat";
 import useAdmin from "../../hooks/useAdmin";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
+import NavThemeToggle from "../Navbar/NavThemeToggle";
 const Header = () => {
   const [drawer, setDrawer] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -300,12 +301,12 @@ const Header = () => {
                   </div>
                 )}
               </>
-
+              <NavThemeToggle></NavThemeToggle>
               <NavLink className="hidden lg:block" to="/">
                 <button
                   type="button"
                   data-dropdown-toggle="apps-dropdown"
-                  class="flex flex-row gap-1 p-2 items-center  ml-0 sm:ml-3 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
+                  class="flex flex-row gap-1 p-2 items-center  ml-0 sm:ml-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
                 >
                   {/* <!-- Icon -->  */}
                   {/* <FaHome className="text-2xl"></FaHome> */}
@@ -341,6 +342,7 @@ const Header = () => {
                   </button>
                 </NavLink>
               )}
+
               {/* developer start */}
               {isLoggedIn && developerStatus == true && (
                 <div
@@ -353,7 +355,7 @@ const Header = () => {
                       data-dropdown-toggle="apps-dropdown"
                       class="p-2  text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                     >
-                      <div className="xl:hidden block">
+                      <div className="hidden ">
                         <svg
                           aria-hidden="true"
                           class="w-6 h-6"
@@ -478,9 +480,9 @@ const Header = () => {
                 </div>
               ) : (
                 <div>
-                  <button className="btn  btn-ghost btn-circle">
+                  <button className="btn hidden lg:flex btn-ghost btn-circle">
                     <NavLink to="/login">
-                      <AiOutlineLogin className="w-7 h-7" />
+                      <AiOutlineLogin className="w-7  h-7" />
                     </NavLink>
                   </button>
                 </div>

@@ -8,7 +8,11 @@ import {
 } from "firebase/auth";
 import app from "../Configs/Firebase.config";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoggedIn, setUserData , setUserLoading } from "../features/api/loginSlice";
+import {
+  setLoggedIn,
+  setUserData,
+  setUserLoading,
+} from "../features/api/loginSlice";
 import { registerUser } from "../features/api/Auth/userActions";
 
 const Login = () => {
@@ -20,6 +24,44 @@ const Login = () => {
   const auth = getAuth(app);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const demoUser = () => {
+    setUsers({
+      email: "hasanshahriar32@outlook.com",
+      password: "grammarpro",
+    });
+    // now call the submitLogin function
+    setLoading(true);
+    const email = users.email;
+    const password = users.password;
+    const name = users.name;
+    const image =
+      users.image ||
+      "https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png";
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        dispatch(setLoggedIn(true));
+        dispatch(setUserData(user));
+        const userData = {
+          name: user?.displayName,
+          email: user?.email,
+          uid: user?.uid,
+          verified: user?.emailVerified,
+          pic: user?.photoURL,
+        };
+        dispatch(registerUser(userData));
+        dispatch(setUserLoading(false));
+        navigate(from, { replace: true });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        // ..
+      });
+  };
   const submitLogin = (e) => {
     e.preventDefault();
     console.log(users);
@@ -98,10 +140,14 @@ const Login = () => {
     <div>
       <section className="bg-gray-50 py-5 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
-        <img src="https://i.ibb.co/FHqDjdX/IMG-20230404-110630-fotor-bg-remover-20230404111148.png" className="w-60 h-auto" alt="" />
+          <img
+            src="https://i.ibb.co/FHqDjdX/IMG-20230404-110630-fotor-bg-remover-20230404111148.png"
+            className="w-60 h-auto"
+            alt=""
+          />
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
               <form
@@ -117,6 +163,7 @@ const Login = () => {
                     type="email"
                     name="email"
                     onBlur={handleEventBlur}
+                    value={users.email}
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
@@ -132,6 +179,7 @@ const Login = () => {
                     name="password"
                     id="password"
                     onBlur={handleEventBlur}
+                    value={users.password}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
@@ -164,27 +212,25 @@ const Login = () => {
                     Forget Password?
                   </label>
                 </div>
-                <button
-                  type="submit"
-                  className="devhiveprimarybtn"
-                >
-                  Sign in
+                <button type="submit" className="devhiveprimarybtn">
+                  SIGN IN
                 </button>
-                
+                <button onClick={demoUser} className="btn btn-secondary w-full">
+                  Demo User
+                </button>
               </form>
               <div className="divider">OR</div>
-              
+
               <LoginProviders></LoginProviders>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet?{" "}
-                  <Link
-                    to="/register"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Sign up
-                  </Link>
-                </p>
-              
+                Don’t have an account yet?{" "}
+                <Link
+                  to="/register"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Sign up
+                </Link>
+              </p>
 
               <div>
                 {/* modal  */}

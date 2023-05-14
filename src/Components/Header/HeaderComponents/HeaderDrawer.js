@@ -169,7 +169,7 @@ const HeaderDrawer = () => {
               <span class="ml-3">Settings</span>
             </NavLink>
             <NavLink
-              to="/user-profile/edit"
+              to="/settings/account"
               className={({ isActive }) =>
                 isActive
                   ? "flex Active hover:font-bold items-center p-2 text-base font-normal text-info rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"

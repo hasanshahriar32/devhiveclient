@@ -80,7 +80,7 @@ const HeroBanner = () => {
           </div>
         </section>
       </div>
-      ;
+      
     </div>
   );
 };

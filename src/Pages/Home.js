@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import HomeBanner from "../Components/Banner/HomeBanner";
 import ServiceSlider from "../Components/ServiceSlider/ServiceSlider";
 import ServiceSlider2 from "../Components/ServiceSlider/ServiceSlider2";
+import Contact from "./Contact";
 const Home = () => {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   return (
@@ -27,6 +28,7 @@ const Home = () => {
       {/* <Team /> */}
       <FiverrBusiness />
       <Newsletter />
+      {/* <Contact></Contact> */}
     </div>
   );
 };

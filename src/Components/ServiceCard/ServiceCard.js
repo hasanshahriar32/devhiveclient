@@ -9,7 +9,7 @@ const ServiceCard = ({ service }) => {
         <div className="relative overflow-hidden">
           <img
             className="w-full bg-cover h-48  inset-0 object-cover object-center"
-            src={service.serviceImage.img1}
+            src={service?.serviceImage?.img1}
             alt=""
           />
         </div>

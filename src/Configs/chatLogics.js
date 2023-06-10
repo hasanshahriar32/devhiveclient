@@ -5,5 +5,5 @@ export const getSenderFull = (loggedUser, users) => {
   return users[0]?._id !== loggedUser ? users[0] : users[1];
 };
 export const getSenderPic = (loggedUser, users) => {
-  return users[0]?._id !== loggedUser ? users[0].pic : users[1].pic;
+  return users[0]?._id !== loggedUser ? users[0]?.pic : users[1]?.pic;
 };

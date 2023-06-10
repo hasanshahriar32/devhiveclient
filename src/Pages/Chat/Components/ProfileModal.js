@@ -57,7 +57,7 @@ const ProfileModal = ({ current }) => {
         <label className="modal-box relative" htmlFor="">
           <div className="avatar flex justify-center w-full">
             <div className="w-24 rounded-full">
-              <img src={current.pic} />
+              <img src={current?.pic} />
             </div>
           </div>
           <h2 className="text-center mt-6 text-2xl font-mono font-semibold">

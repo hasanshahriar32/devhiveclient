@@ -243,7 +243,8 @@ const LeftChatNav = () => {
                       src={getSenderPic(
                         localStorage.getItem("user_id"),
                         chat?.users
-                      )}
+                      ) || 'https://www.theventuretours.com/wp-content/uploads/2020/03/avatar-icon-png-1-600x600.png'
+}
                       alt=""
                     />
                   </div>

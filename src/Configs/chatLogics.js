@@ -1,5 +1,5 @@
 export const getSenderName = (loggedUser, users) => {
-  return users[0]?._id !== loggedUser ? users[0].name : users[1].name;
+  return users[0]?._id !== loggedUser ? users[0]?.name : users[1]?.name;
 };
 export const getSenderFull = (loggedUser, users) => {
   return users[0]?._id !== loggedUser ? users[0] : users[1];
